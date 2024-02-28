@@ -104,19 +104,8 @@ class ExamenServiceImplTest {
         Examen newExamen = Datos.EXAMEN;
         newExamen.setPreguntas(Datos.PREGUNTAS);
 
-        when(examenRepository.guardar(any(Examen.class))).then(new Answer<Examen>(){
-
-            Long secuencia = 8L;
-
-            @Override
-            public Examen answer(InvocationOnMock invocation) throws Throwable {
-                Examen examen = invocation.getArgument(0);
-                examen.setId(secuencia++);
-                return examen;
-            }
-        });
-
         // When
+        when(examenRepository.guardar(any(Examen.class))).thenReturn(Datos.EXAMEN);
         Examen examen = examenServiceImp.guardar(newExamen);
 
         // Then
